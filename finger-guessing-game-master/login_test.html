@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录测试</title>
+		<script type="text/javascript" src="js/wilddog.js" ></script>
+		<script>
+			//野狗ref
+			var ref = new Wilddog("https://xiaogestudio.wilddogio.com/");
+			//子节点
+			var	refUsers = ref.child('users');
+			function LoginTest () {
+				var username = document.getElementById("username").value;
+				var pwd = document.getElementById("password").value;
+				var getPwd;
+				refUsers.child(username).once('value',function(snapshot){
+					getPwd = snapshot.val()["password"];
+					if (pwd == getPwd) {
+						alert("Successfull");
+					} else{
+						alert("Username or password error.");
+					}
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<p>用户名：<input id="username" type="text" placeholder="请输入用户名" /></p>
+		<p>密    码：<input id="password" type="password" placeholder="请输入用密码" /></p>
+		<p><input id="LoginTest" type="button" value="登录" onclick="LoginTest()" /></p>
+		
+	</body>
+</html>
